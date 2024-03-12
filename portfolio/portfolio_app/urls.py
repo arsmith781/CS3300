@@ -18,5 +18,7 @@ urlpatterns = [
     # Forms for models
     path('portfolio/<int:portfolio_id>/create_project/', views.createProject, name='create-project'),
     path('portfolio/<int:portfolio_id>/update_project/<int:project_id>', views.updateProject, name='update-project'),
+    path('portfolio/<int:portfolio_id>/delete_project/<int:project_id>', views.deleteProject, name='delete-project'),
+    path('student/<int:student_id>/update_portfolio/<int:portfolio_id>', views.updatePortfolio, name='update-portfolio'),
 
 ]

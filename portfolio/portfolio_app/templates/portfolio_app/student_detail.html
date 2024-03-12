@@ -6,7 +6,9 @@
 <h1>Name: {{student.name}} </h1>
 <p>Major: {{student.major}}</p>
 <p>Email: {{student.email}}</p>
-<p>Portfolio: {{student.portfolio.title}}</p>
+<p>Portfolio: {{student.portfolio.title}}
+<a class="btn btn-info" href="{% url 'update-portfolio' student_id=student.id portfolio_id=student.portfolio.id %}" role="button">Update Portfolio</a>
+</p>
 
 
 {% endblock %}

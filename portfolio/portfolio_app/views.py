@@ -11,6 +11,7 @@ def index(request):
     studentActivePortfolios = Student.objects.select_related('portfolio').all().filter(portfolio__is_active=True)
     return render(request, 'portfolio_app/index.html', {'studentActivePortfolios': studentActivePortfolios})
 
+# https://www.youtube.com/watch?v=EX6Tt-ZW0so
 def createProject(request, portfolio_id):
     portfolio = Portfolio.objects.get(pk=portfolio_id)
 
@@ -40,7 +41,20 @@ def updateProject(request, portfolio_id, project_id):
     project = Project.objects.get(pk=project_id)
     form = ProjectForm(instance=project)
     context = {'form': form}
-    return render(request, 'portfolio_app/project_form.html', context)
+    return render(request, 'portfolio_app/portfolio_form.html', context)
+
+
+def deleteProject(request, portfolio_id, project_id):
+    project = Project.objects.get(pk=project_id)
+    context = {'item' : project}
+    return render(request, 'portfolio_app/delete_form.html', context)
+
+
+def updatePortfolio(request, student_id, portfolio_id):
+    project = Portfolio.objects.get(pk=portfolio_id)
+    form = PortfolioForm(instance=project)
+    context = {'form': form}
+    return render(request, 'portfolio_app/portfolio_form.html', context)
 
 
 # Views for models.py data
