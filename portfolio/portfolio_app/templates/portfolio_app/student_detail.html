@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-</head>
-<body>
+{% extends "portfolio_app/base_template.html" %}
 
-</body>
-</html>
+<!-- Replace block content in base_template.html -->
+{% block content %}
+
+<h1>Name: {{student.name}} </h1>
+<p>Major: {{student.major}}</p>
+<p>Email: {{student.email}}</p>
+<p>Portfolio: {{student.portfolio.title}}</p>
+
+
+{% endblock %}
