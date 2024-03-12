@@ -11,20 +11,19 @@ def index(request):
     studentActivePortfolios = Student.objects.select_related('portfolio').all().filter(portfolio__is_active=True)
     return render(request, 'portfolio_app/index.html', {'studentActivePortfolios': studentActivePortfolios})
 
+
 # https://www.youtube.com/watch?v=EX6Tt-ZW0so
 def createProject(request, portfolio_id):
     portfolio = Portfolio.objects.get(pk=portfolio_id)
 
     if request.method == 'POST':
-        project_data = request.copy()
-        project_data['portfolio_id'] = portfolio_id
-        form = ProjectForm(project_data)
+        form = ProjectForm(request.POST)
         if form.is_valid():
-            # Save and dont commit to database
-            project = form.save(commit=False)
-            # create the portfolio -> project relationship
-            project.portfolio = portfolio
-            project.save()
+            # # Save and dont commit to database
+            # project = form.save(commit=False)
+            # # create the portfolio -> project relationship
+            # project.portfolio = portfolio
+            # project.save()
 
             # Go to the portfolio detail page
             return redirect('portfolio-detail', pk=portfolio_id)
@@ -40,6 +39,17 @@ def createProject(request, portfolio_id):
 def updateProject(request, portfolio_id, project_id):
     project = Project.objects.get(pk=project_id)
     form = ProjectForm(instance=project)
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            # # Save and dont commit to database
+            # project = form.save(commit=False)
+            # # create the portfolio -> project relationship
+            # project.portfolio = portfolio
+            # project.save()
+
+            # Go to the portfolio detail page
+            return redirect('portfolio-detail', pk=portfolio_id)
     context = {'form': form}
     return render(request, 'portfolio_app/portfolio_form.html', context)
 
@@ -53,6 +63,12 @@ def deleteProject(request, portfolio_id, project_id):
 def updatePortfolio(request, student_id, portfolio_id):
     project = Portfolio.objects.get(pk=portfolio_id)
     form = PortfolioForm(instance=project)
+
+    if request.method == 'POST':
+        form = PortfolioForm(request.POST)
+        if form.is_valid():
+            return redirect('student-detail', pk=student_id)
+
     context = {'form': form}
     return render(request, 'portfolio_app/portfolio_form.html', context)
 
