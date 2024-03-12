@@ -9,13 +9,13 @@
 <p><strong>Is Active: </strong> {{portfolio.is_active}}</p>
 
 <h2>Projects</h2>
-<a class="btn btn-primary" href="#" role="button">New</a>
+<a class="btn btn-primary" href="{% url 'create-project' portfolio_id=portfolio.id%}" role="button">New</a>
 
 <ul>
 {% for project in portfolio.project_set.all %}
     <li>{{ project.title }}
     <a class="btn btn-primary" href="{{ project.get_absolute_url }}" role="button">View</a>
-    <a class="btn btn-primary" href="#" role="button">Update</a>
+    <a class="btn btn-primary" href="{% url 'update-project' portfolio_id=portfolio.id project_id=project.id %}" role="button">Update</a>
     <a class="btn btn-primary" href="#" role="button">Delete</a>
     </li>
 {% empty %}
