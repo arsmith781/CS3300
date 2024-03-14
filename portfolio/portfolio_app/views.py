@@ -14,8 +14,7 @@ def index(request):
 
 # https://www.youtube.com/watch?v=EX6Tt-ZW0so
 def createProject(request, portfolio_id):
-    portfolio = Portfolio.objects.get(pk=portfolio_id)
-
+    # portfolio = Portfolio.objects.get(pk=portfolio_id)
     if request.method == 'POST':
         form = ProjectForm(request.POST)
         if form.is_valid():
