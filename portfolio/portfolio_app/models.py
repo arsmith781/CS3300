@@ -22,7 +22,6 @@ class Project(models.Model):
     description = models.TextField()
     portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE)
 
-
     def __str__(self):
         return self.title
 
